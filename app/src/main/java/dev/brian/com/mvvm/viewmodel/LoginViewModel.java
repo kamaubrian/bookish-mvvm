@@ -3,6 +3,7 @@ package dev.brian.com.mvvm.viewmodel;
 import android.arch.lifecycle.ViewModel;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import dev.brian.com.mvvm.model.User;
 import dev.brian.com.mvvm.utils.LoginResultCallback;
@@ -52,5 +53,13 @@ public class LoginViewModel extends ViewModel {
                 user.setPassword(editable.toString());
             }
         };
+    }
+
+    public void onLoginClicked(View view){
+        if(user.isValidData()){
+            loginResultCallback.onSuccess("Login Success");
+        }else {
+            loginResultCallback.onError("Login Failed");
+        }
     }
 }

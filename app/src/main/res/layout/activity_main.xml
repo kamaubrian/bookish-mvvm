@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+  >
+    <data>
+        <variable
+            name="viewModel"
+            type="dev.brian.com.mvvm.viewmodel.LoginViewModel"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+        <LinearLayout
+            android:id="@+id/credentials_l"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/edt_email"
+                android:hint="Enter Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                app:addTextChangedListener="@{viewModel.getEmailTextWatcher}"/>
+            <EditText
+                android:id="@+id/edt_password"
+                android:hint="Enter Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                app:addTextChangedListener="@{viewModel.getPasswordTextWatcher}"/>
+        </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credentials_l"
+            android:layout_marginTop="20dp"
+            android:text="LOGIN"
+            android:onClick="@{viewModel::onLoginClicked}"/>
+    </RelativeLayout>
+</layout>
